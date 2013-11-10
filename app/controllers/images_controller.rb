@@ -1,14 +1,14 @@
 class ImagesController < ApplicationController
   def show
-    @image = Images.find(params[:id])
+    @image = Image.find(params[:id])
   end
 
   def new
-    @image = Images.new
+    @image = Image.new
   end
 
   def create
-    @image = Images.new(params[:image])
+    @image = Image.new(params[:image])
 
     if @image.save
       format.html { redirect_to @image, notice: 'Image was successfully created.' }

@@ -1,0 +1,9 @@
+<h1>New Image</h1>
+<%= form_for @image do |f| %>
+  <%= render 'error_messages', :object => f.object %>
+  <div class="field">
+    <%= f.label :data_uri, "Data URI" %>: <br />
+    <%= f.text_area :data_uri, :rows => 10, :cols => 80 %>
+  </div>
+  <%= f.submit %>
+<% end %>
