@@ -22,7 +22,8 @@ class ImagesController < ApplicationController
     # TODO: Since the Data URI too large and is being saved to provide a
     # non-transient state at GET URL time, the database size will diverge.
     # If this module becomes popular, a line should be placed here to
-    # wipe out model objects that are too old to matter.
+    # wipe out model objects that are too old to matter. Alternatively,
+    # the database cost should be handled.
 
     respond_to do |format|
       if @image.save        
@@ -41,7 +42,7 @@ class ImagesController < ApplicationController
 
   def decode
     # Render as a real image.
-    send_data @image.decode, :type => "image", :disposition => 'inline'
+    send_data @image.decode, :type => "image/png", :disposition => 'inline'
   end
 
   private
