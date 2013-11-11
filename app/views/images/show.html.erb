@@ -1,2 +1,8 @@
-<h1>Images#show</h1>
-<p>Find me in app/views/images/show.html.erb</p>
+<% rendered = render_image_url(@image) %>
+<h1>Image Data URI decoded</h1>
+<h3>Decoded image generated URL:</h3>
+<code><%= link_to rendered, rendered %></code>
+<h3>Rendered:</h3>
+<%= link_to render_image_path(@image) do %>
+  <%= image_tag rendered, :style => "max-width:320px;" %>
+<% end %>

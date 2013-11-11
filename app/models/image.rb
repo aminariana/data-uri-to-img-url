@@ -15,4 +15,22 @@
 #
 
 class Image < ActiveRecord::Base
+  before_create :generate_token
+
+  def to_param
+    token
+  end
+
+  def decode
+    @decode ||= Base64.decode64(data_uri)
+  end
+
+  protected
+
+  def generate_token
+    self.token = loop do
+      random_token = SecureRandom.urlsafe_base64(8, false)
+      break random_token unless Image.exists?(token: random_token)
+    end
+  end
 end
