@@ -21,7 +21,7 @@ Author:
 - http://www.aminariana.com
 
 Documentation site:
-- TBD
+- http://aminariana.github.io/data-uri-to-img-url
 
 The main API is the following path, used in POST requests:
 - http://data-uri-to-img-url.herokuapp.com/images.json
