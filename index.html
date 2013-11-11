@@ -1,0 +1,133 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
+  <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/script.js"></script>
+
+  <title>Data-uri-to-img-url</title>
+  <meta name="description" content="This service takes a Base64 encoded DataURI via a POST request, and responds with a URL representing the decoded image.">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">Data-uri-to-img-url</h1>
+    </header>
+    <div id="container">
+      <p class="tagline">This service takes a Base64 encoded DataURI via a POST request, and responds with a URL representing the decoded image.</p>
+      <div id="main" role="main">
+        <div class="download-bar">
+        <div class="inner">
+          <a href="https://github.com/aminariana/data-uri-to-img-url/tarball/master" class="download-button tar"><span>Download</span></a>
+          <a href="https://github.com/aminariana/data-uri-to-img-url/zipball/master" class="download-button zip"><span>Download</span></a>
+          <a href="https://github.com/aminariana/data-uri-to-img-url" class="code">View Data-uri-to-img-url on GitHub</a>
+        </div>
+        <span class="blc"></span><span class="trc"></span>
+        </div>
+        <article class="markdown-body">
+          <h1>
+<a name="data-uri-to-img-url" class="anchor" href="#data-uri-to-img-url"><span class="octicon octicon-link"></span></a>data-uri-to-img-url</h1>
+
+<p>This service takes a Base64 encoded DataURI via a POST request, and responds with a URL representing the decoded image. It's useful as a Javascript API to take a screenshot of an HTML5 canvas and convert it to a URL that can then be shared on social networks.</p>
+
+<p>The way we originally envisioned using this was for a project that generated custom canvas images. We wanted to share a screenshot of the canvas on Facebook. So we used this in combination with the following project to convert the canvas to an image and wrap it in a page with opengraph META tags in real time. See the following complementing project:</p>
+
+<p><a href="https://github.com/aminariana/opengraph-meta-describer">https://github.com/aminariana/opengraph-meta-describer</a></p>
+
+<h2>
+<a name="live-production-instance" class="anchor" href="#live-production-instance"><span class="octicon octicon-link"></span></a>Live production instance</h2>
+
+<p>The main production instance for your use:</p>
+
+<ul>
+<li><a href="http://data-uri-to-img-url.herokuapp.com">http://data-uri-to-img-url.herokuapp.com</a></li>
+</ul><h2>
+<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h2>
+
+<p>Author:</p>
+
+<ul>
+<li><a href="http://www.aminariana.com">http://www.aminariana.com</a></li>
+</ul><p>Documentation site:</p>
+
+<ul>
+<li>TBD</li>
+</ul><p>The main API is the following path, used in POST requests:</p>
+
+<ul>
+<li><a href="http://data-uri-to-img-url.herokuapp.com/images.json">http://data-uri-to-img-url.herokuapp.com/images.json</a></li>
+</ul><p><strong>The POST request parameters accepted:</strong></p>
+
+<ul>
+<li>'image[data_uri]': The 64 bit encoded string representing the image</li>
+</ul><p><strong>The expected response:</strong>
+A JSON response containing a URL to the decoded image. For example:</p>
+
+<pre><code>{ url: 'http://data-uri-to-img-url.herokuapp.com/AdLtqeN_DJc' }
+</code></pre>
+
+<h2>
+<a name="motivation-and-benefits" class="anchor" href="#motivation-and-benefits"><span class="octicon octicon-link"></span></a>Motivation and Benefits</h2>
+
+<p>When you have a custom HTML5 canvas, you can use this project to convert the DataURI (the 64 bit JS-serialized screenshot of the canvas) to a globally reachable Image URL.</p>
+
+<h2>
+<a name="example" class="anchor" href="#example"><span class="octicon octicon-link"></span></a>Example</h2>
+
+<p>For some reason you've 64-bit encoded an HTML5 canvas rendering of President Obama giving a speech, using Javascript:</p>
+
+<pre><code>var img_uri= canvas.toDataURL("image/png");
+</code></pre>
+
+<p>Yes, you can render this as an IMG tag within the same app. But how would you, say, share it on Facebook? You'd need to convert it to a URL first:</p>
+
+<pre><code>  # Make a POST request to 'http://data-uri-to-img-url.herokuapp.com/images.json' with param 'image[data_uri]' set to the above DataURI input.
+  # This could be from an HTML form with a textarea, or programmatically using an AJAX POST request.
+</code></pre>
+
+<p>The result:</p>
+
+<pre><code>{ url: 'http://data-uri-to-img-url.herokuapp.com/AdLtqeN_DJc' }
+</code></pre>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>MIT License. Use with credit and care.</p>
+
+<p>i.e.:
+<img src="http://data-uri-to-img-url.herokuapp.com/AdLtqeN_DJc" alt="Rendered Image"></p>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/aminariana" class="avatar"><img src="https://1.gravatar.com/avatar/8bb6b72b851fcd133490fc9cc28e9505?d=https%3A%2F%2Fidenticons.github.com%2Ff542a79d401703a815e08961bdaa8440.png&amp;r=x&amp;s=60" width="48" height="48"/></a> <a href="https://github.com/aminariana">aminariana</a> maintains <a href="https://github.com/aminariana/data-uri-to-img-url">Data-uri-to-img-url</a></p>
+
+
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br/>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a></small>
+      </div>
+    </footer>
+  </div>
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/aminariana/data-uri-to-img-url/tarball/master" class="tar">tar</a><a href="https://github.com/aminariana/data-uri-to-img-url/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+  
+</body>
+</html>
