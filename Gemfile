@@ -10,10 +10,6 @@ group :production do
   gem 'rails_12factor'                    # Heroku Asset Pipeline
 end
 
-group :development, :test do
-  gem 'rspec-rails'                       # Behavior Driven Development
-end
-
 group :development do
   gem 'annotate'                          # Annotate routes and models
 end
