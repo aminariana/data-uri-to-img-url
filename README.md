@@ -60,6 +60,9 @@ The result:
 { url: 'http://data-uri-to-img-url.herokuapp.com/AdLtqeN_DJc' }
 ```
 
+See example.js.html for source code rendering a canvas in real-time to an image URL.
+
+
 License
 -------
 MIT License. Use with credit and care.
