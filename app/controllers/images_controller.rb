@@ -26,7 +26,7 @@ class ImagesController < ApplicationController
     # the database cost should be handled.
 
     respond_to do |format|
-      if @image.save        
+      if @image.save
         format.html { redirect_to @image, notice: 'Image was successfully created.' }
         format.json {
           render json: {
