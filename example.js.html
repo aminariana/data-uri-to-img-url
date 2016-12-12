@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  </head>
+<body>
+  <canvas></canvas>
+  <script>
+    var imageData = $('canvas')[0].toDataURL("image/png");
+    var imageDataRaw = imageData.replace(/^data:image\/\w+;base64,/, "");
+    $.ajax({
+      url: "http://data-uri-to-img-url.herokuapp.com/images.json",
+      type: "POST",
+      data: { 'image': { 'data_uri': imageDataRaw } },
+      success:function(data){
+        console.log(data);
+      },
+      error:function(shr, status, data){
+        console.log("error " + data + " Status " + shr.status);
+      },
+    });
+  </script>
+</body>
+</html>
