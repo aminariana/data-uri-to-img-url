@@ -4,21 +4,54 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   </head>
 <body>
+  <h3>Draw a circle on canvas:</h3>
   <canvas></canvas>
+  <h3>Encode data from canvas in real-time after page load:</h3>
+  <textarea rows=10 cols=80></textarea>
+  <h3>Save encoding to the server, get a URL back, and render it in real-time:</h3>
   <script>
-    var imageData = $('canvas')[0].toDataURL("image/png");
-    var imageDataRaw = imageData.replace(/^data:image\/\w+;base64,/, "");
-    $.ajax({
-      url: "http://data-uri-to-img-url.herokuapp.com/images.json",
-      type: "POST",
-      data: { 'image': { 'data_uri': imageDataRaw } },
-      success:function(data){
-        console.log(data);
-      },
-      error:function(shr, status, data){
-        console.log("error " + data + " Status " + shr.status);
-      },
-    });
+    window.onload = function() {
+      var canvas = $('canvas')[0];
+      var ctx = canvas.getContext("2d");
+      // Draw circles
+      ctx.beginPath();
+      ctx.arc(50, 50, 20, 0, Math.PI*2, true);
+      ctx.closePath();
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(120, 50, 20, 0, Math.PI*2, true);
+      ctx.closePath();
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(85, 100, 20, 10, Math.PI*2, true);
+      ctx.closePath();
+      ctx.fill();
+      var imageData = canvas.toDataURL("image/png");
+      var imageDataRaw = imageData.replace(/^data:image\/\w+;base64,/, "");
+      $("textarea").html(imageDataRaw);
+      $.ajax({
+        url: "http://data-uri-to-img-url.herokuapp.com/images.json",
+        type: "POST",
+        data: { 'image': { 'data_uri': imageDataRaw } },
+        xhrFields: {
+          // The 'xhrFields' property sets additional fields on the XMLHttpRequest.
+          // This can be used to set the 'withCredentials' property.
+          // Set the value to 'true' if you'd like to pass cookies to the server.
+          // If this is enabled, your server must respond with the header
+          // 'Access-Control-Allow-Credentials: true'.
+          withCredentials: false
+        },
+        success:function(data){
+          console.log(data);
+          url = data['url'];
+          $("body").append("<p><a href=" + url + ">" + url + "</a></p>")
+          $("body").append("<img src=" + url + ">")
+        },
+        error:function(shr, status, data){
+          console.log("error " + data + " Status " + shr.status);
+        },
+      });
+    }
   </script>
 </body>
 </html>
