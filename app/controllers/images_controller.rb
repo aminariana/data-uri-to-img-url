@@ -25,6 +25,16 @@ class ImagesController < ApplicationController
     # wipe out model objects that are too old to matter. Alternatively,
     # the database cost should be handled.
 
+    # ... AAAAAnd the database diverged beyond Heroku's 10K row capabity.
+    # I'm wiping out anything older than the last 10K rows. If you want to
+    # keep stuff for a long time, either host your own or offer to pay me a
+    # monthly subscription fee so I can cover Heroku costs.
+    parallel_uploads_max = 1000
+    free_capacity = 10000 - parallel_uploads_max
+    actual_row_count = Image.count
+    above_capacity = actual_row_count - free_capacity
+    Image.limit(above_capacity).order(:created_at).delete_all
+
     respond_to do |format|
       if @image.save
         format.html { redirect_to @image, notice: 'Image was successfully created.' }

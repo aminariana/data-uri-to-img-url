@@ -14,6 +14,12 @@ Live production instance
 The main production instance for your use:
 - http://data-uri-to-img-url.herokuapp.com
 
+As of July 26, 2017, the database grew too large to maintain records for free.
+I have modified code to only keep the latest 10K uploads, so that I can still
+keep it below the free tier. If you want your image resources to remain in cache
+permanently, either host your own service or offer me a fee so I can pay
+database costs to Heroku.
+
 Documentation
 -------------
 
