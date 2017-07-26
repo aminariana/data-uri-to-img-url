@@ -33,7 +33,10 @@ class ImagesController < ApplicationController
     free_capacity = 10000 - parallel_uploads_max
     actual_row_count = Image.count
     above_capacity = actual_row_count - free_capacity
-    Image.limit(above_capacity).order(:created_at).destroy_all
+    Image.limit(above_capacity).find_each do |img|
+      Rails.logger.warn("[DELETE] #{img.id}: \"#{img.token}\"")
+      img.destroy!
+    end
 
     respond_to do |format|
       if @image.save
