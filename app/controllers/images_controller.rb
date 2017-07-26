@@ -33,7 +33,7 @@ class ImagesController < ApplicationController
     free_capacity = 10000 - parallel_uploads_max
     actual_row_count = Image.count
     above_capacity = actual_row_count - free_capacity
-    Image.limit(above_capacity).order(:created_at).delete_all
+    Image.limit(above_capacity).order(:created_at).destroy_all
 
     respond_to do |format|
       if @image.save
