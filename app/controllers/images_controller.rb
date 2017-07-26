@@ -61,7 +61,7 @@ class ImagesController < ApplicationController
   private
 
   def find
-    @image = Image.find_by_token(params[:id])
+    @image = Image.find_by!(token: params[:id])
   end
 
   def image_params
